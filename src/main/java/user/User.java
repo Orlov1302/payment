@@ -10,7 +10,7 @@ public class User {
     public String stringFIO;
     public ArrayList<Account> accounts;
     public ArrayList<Phone> phones;
-    ///
+
     public void addNumberAccount( String numberAccount ){
         accounts.add(new Account(numberAccount));
     }

@@ -10,7 +10,7 @@ public class PaymantPhone implements Payment {
         this.server = server;
         this.port = port;
     }
-    ////
+
     @Override
     public void pay(Account account, Phone phone) throws PhoneException {
         phone.exceptionCorrectPhone();
