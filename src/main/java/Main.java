@@ -27,7 +27,7 @@ public class Main {
     }
 
     public static void startShowUser( User user ){
-        // создать фрейм в потоке диспетчеризации событий
+        /// создать фрейм в потоке диспетчеризации событий
         SwingUtilities.invokeLater(() -> new ShowUser(user));
         /* То же самое записанное в старом стиле:
         SwingUtilities.invokeLater(new Runnable() {
