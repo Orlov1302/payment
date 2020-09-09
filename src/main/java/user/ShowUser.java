@@ -12,8 +12,6 @@ public class ShowUser {
         jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // создать метку с текстом сообщения
 
-
-
         //////////////////////////////
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -28,18 +26,14 @@ public class ShowUser {
         jfrm.add(mainPanel);
         /////////////
 
-
         JLabel jlab = new JLabel("Пользователь №" + user.numberUser + " " + user.stringFIO );
         // ввести метку на панели содержимого
         panel1.add(jlab);
 
-
-
-
         String[] colHeadsAccounts = {"Счета"};
-        String[][] dataAccounts = new String[user.sizeAccounts()][1];
-        for(int n=0; n<user.sizeAccounts(); ++n){
-            dataAccounts[n][0] = user.getAccount(n).numberAccount;
+        String[][] dataAccounts = new String[user.getAccounts().size()][1];
+        for(int n=0; n<user.getAccounts().size(); ++n){
+            dataAccounts[n][0] = user.getAccounts().get(n).getNumberAccount();
         }
         JTable tableAccounts = new JTable(dataAccounts, colHeadsAccounts);
         JScrollPane jspAccounts = new JScrollPane(tableAccounts);
@@ -47,15 +41,13 @@ public class ShowUser {
 
 
         String[] colHeadsPhones = {"Телефонные номера"};
-        String[][] dataPhones = new String[user.sizePhones()][1];
-        for(int n=0; n<user.sizePhones(); ++n){
-            dataPhones[n][0] = user.getPhone(n).numberPhone;
+        String[][] dataPhones = new String[user.getPhones().size()][1];
+        for(int n=0; n<user.getPhones().size(); ++n){
+            dataPhones[n][0] = user.getPhones().get(n).getNumberPhone();
         }
         JTable tablePhones = new JTable(dataPhones, colHeadsPhones);
         JScrollPane jspPhones = new JScrollPane(tablePhones);
         panel3.add(jspPhones);
-
-
 
         // отобразить фрейм
         jfrm.setVisible(true);

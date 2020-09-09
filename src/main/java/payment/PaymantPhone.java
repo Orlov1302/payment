@@ -14,6 +14,6 @@ public class PaymantPhone implements Payment {
     @Override
     public void pay(Account account, Phone phone) throws PhoneException {
         phone.exceptionCorrectPhone();
-        System.out.println("Оплата произведена успешно со счета " + account.numberAccount + " для телефона " + phone.numberPhone );
+        System.out.println("Оплата произведена успешно со счета " + account.numberAccount + " для телефона " + phone.getNumberPhone() );
     }
 }

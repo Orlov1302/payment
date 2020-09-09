@@ -1,15 +1,17 @@
 package payment;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import my_exception.PhoneException;
 
+@AllArgsConstructor
+@Setter
+@Getter
 public class Phone {
-    public String numberPhone;
+    private String numberPhone;
 
-    public Phone(String numberPhone) {
-        this.numberPhone = numberPhone;
-    }
-
-    public String errorNumberPhone() {
+    public String errorNumberPhone(){
         String strReturn = "";
         for(int x=0 ; x<numberPhone.length() ; ++x){
             char c = numberPhone.charAt(x);
