@@ -14,7 +14,7 @@ public class Server {
     public String getPay(Date date, String numberAccount, String numberPhone, long summa ){
         ParametersPayment parametersPayment = new ParametersPayment(numberAccount, numberPhone, summa);
         if( oldPayments.containsEntry(date, parametersPayment) ){
-            return "Запрос поступил поторно !!!!!!!!!!!!!!!!!!!!";
+            return "Запрос поступил поторно !!!!!!!!!!!!!";
         }
         oldPayments.put(date, parametersPayment);
         return "Оплата произведена успешно со счета " + numberAccount + " для телефона " + numberPhone;
