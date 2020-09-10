@@ -1,7 +1,9 @@
 package payment;
 
 import my_exception.PhoneException;
+import user.Account;
+import user.Phone;
 
 public interface Payment {
-    void pay( Account account, Phone phone ) throws PhoneException;
+    void sendPay(boolean first, String numberAccount, String numberPhone, long summa) throws PhoneException;
 }

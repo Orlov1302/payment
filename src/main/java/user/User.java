@@ -20,10 +20,10 @@ public class User {
         phones = new ArrayList<Phone>();
     }
 
-    public void payPhone( PaymantPhone paymantPhone, int nAccount, int nPhone ){
-        System.out.println("------- Начало попытки платежа на сервер " + paymantPhone.server + " (порт " + paymantPhone.port + ") -------");
+    public void payPhone( boolean first, PaymantPhone paymantPhone, int nAccount, int nPhone, long summa ){
+        System.out.println("------- Начало попытки платежа на сервер " + paymantPhone.getServerName() + " (порт " + paymantPhone.getPort() + ") -------");
         try{
-            paymantPhone.pay(accounts.get(nAccount), phones.get(nPhone));
+            paymantPhone.sendPay(first, accounts.get(nAccount).getNumberAccount(), phones.get(nPhone).getNumberPhone(), summa);
         }
         catch(PhoneException p_ex){
             System.out.println(p_ex.getMessage());

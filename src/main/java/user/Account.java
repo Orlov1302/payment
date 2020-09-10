@@ -1,4 +1,4 @@
-package payment;
+package user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Account {
-    public String numberAccount;
+    private String numberAccount;
 }

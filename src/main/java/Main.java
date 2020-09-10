@@ -1,8 +1,8 @@
 import user.*;
 import payment.*;
-import my_exception.*;
 
 import javax.swing.*;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,18 +12,19 @@ public class Main {
         user1.getAccounts().add(new Account("1234500001"));
         user1.getAccounts().add(new Account("1234500002"));
         user1.getAccounts().add(new Account("1234500003"));
-        user1.payPhone(paymantPhone1,0,0);
+        user1.payPhone(true, paymantPhone1,0,0, 100);
 
         user1.getPhones().add(new Phone("89O5777O356"));
-        user1.payPhone(paymantPhone1,0,0);
+        user1.payPhone(true, paymantPhone1,0,0, 200);
 
         user1.getPhones().add(new Phone("9O5777O356"));
-        user1.payPhone(paymantPhone1,0,1);
+        user1.payPhone(true, paymantPhone1,0,1, 300);
 
         user1.getPhones().set(1, new Phone("9057770356"));
-        user1.payPhone(paymantPhone1,0,1);
+        user1.payPhone(true, paymantPhone1,0,1, 400);
+        user1.payPhone(false, paymantPhone1,0,1, 400);
 
-        startShowUser( user1 );
+        //startShowUser( user1 );
         System.out.println("========================================= ");
     }
 
