@@ -20,3 +20,5 @@ public class Server {
         return "Оплата произведена успешно со счета " + numberAccount + " для телефона " + numberPhone;
     }
 }
+
+//
