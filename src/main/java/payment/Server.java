@@ -3,20 +3,32 @@ package payment;
 import com.google.common.collect.HashMultimap;
 
 import java.util.Date;
+import java.util.HashSet;
 
 public class Server {
-    private HashMultimap<Date, ParametersPayment> oldPayments; // Здесь храняться старые запросы
+    private HashSet<ParametersPayment> oldPayments; // Здесь храняться старые запросы
+    private HashMultimap<Date, ParametersMulti> oldPaymentsMulti; // Здесь храняться старые запросы
 
     public Server(){
-        oldPayments = HashMultimap.create();
+        oldPayments = new HashSet<>();
+        oldPaymentsMulti = HashMultimap.create();
     }
 
     public String getPay(Date date, String numberAccount, String numberPhone, long summa ){
-        ParametersPayment parametersPayment = new ParametersPayment(numberAccount, numberPhone, summa);
-        if( oldPayments.containsEntry(date, parametersPayment) ){
-            return "Запрос поступил поторно !!!!!!!!!!!!!";
+        ParametersPayment parametersTest = new ParametersPayment(date, numberAccount, numberPhone, summa);
+        if( oldPayments.contains(parametersTest) ){
+            return "Запрос поступил повторно !!!!!!!!!!!!!\n";
         }
-        oldPayments.put(date, parametersPayment);
-        return "Оплата произведена успешно со счета " + numberAccount + " для телефона " + numberPhone;
+        oldPayments.add(parametersTest);
+        return "Оплата произведена успешно со счета " + numberAccount + " для телефона " + numberPhone + "\n";
+    }
+
+    public String getPayMulti(Date date, String numberAccount, String numberPhone, long summa ){
+        ParametersMulti parametersMulti = new ParametersMulti(numberAccount, numberPhone, summa);
+        if( oldPaymentsMulti.containsEntry(date, parametersMulti) ){
+            return "Запрос поступил повторно !!!!!!!!!!!!!\n";
+        }
+        oldPaymentsMulti.put(date, parametersMulti);
+        return "Оплата произведена успешно со счета " + numberAccount + " для телефона " + numberPhone + "\n";
     }
 }

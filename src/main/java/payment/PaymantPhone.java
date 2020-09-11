@@ -21,7 +21,7 @@ public class PaymantPhone implements Payment {
     }
 
     @Override
-    public void sendPay(boolean first, String numberAccount, String numberPhone, long summa) throws PhoneException {
+    public String sendPay(boolean first, String numberAccount, String numberPhone, long summa) throws PhoneException {
         Date date;
         Phone.exceptionCorrectPhone( numberPhone );
         if( first ){
@@ -30,8 +30,19 @@ public class PaymantPhone implements Payment {
         }else{
             date = oldDate;
         }
-        String str = server.getPay(date, numberAccount, numberPhone, summa);
-        System.out.println(str);
+        return server.getPay(date, numberAccount, numberPhone, summa);
+    }
+
+    public String sendPayMulti(boolean first, String numberAccount, String numberPhone, long summa) throws PhoneException {
+        Date date;
+        Phone.exceptionCorrectPhone( numberPhone );
+        if( first ){
+            date = new Date();
+            oldDate = date;
+        }else{
+            date = oldDate;
+        }
+        return server.getPayMulti(date, numberAccount, numberPhone, summa);
     }
 
 }

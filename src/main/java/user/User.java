@@ -20,20 +20,40 @@ public class User {
         phones = new ArrayList<Phone>();
     }
 
-    public void payPhone( boolean first, PaymantPhone paymantPhone, int nAccount, int nPhone, long summa ){
-        System.out.println("------- Начало попытки платежа на сервер " + paymantPhone.getServerName() + " (порт " + paymantPhone.getPort() + ") -------");
+    public String payPhone( boolean first, PaymantPhone paymantPhone, int nAccount, int nPhone, long summa ){
+        String strReturn;
+        strReturn = "------- Начало попытки платежа на сервер " + paymantPhone.getServerName() + " (порт " + paymantPhone.getPort() + ") -------\n";
         try{
-            paymantPhone.sendPay(first, accounts.get(nAccount).getNumberAccount(), phones.get(nPhone).getNumberPhone(), summa);
+            strReturn += paymantPhone.sendPay(first, accounts.get(nAccount).getNumberAccount(), phones.get(nPhone).getNumberPhone(), summa);
         }
         catch(PhoneException p_ex){
-            System.out.println(p_ex.getMessage());
-            System.out.println("Номер телефона: " + p_ex.getPhone());
+            strReturn += "Иcключeниe: " + p_ex.getMessage() + "\n" + "Номер телефона: " + p_ex.getPhone() + "\n";
         }
         catch(Exception ex){
-            System.out.println("Иcключeниe: " + ex.getMessage());
+            strReturn += "Иcключeниe: " + ex.getMessage() + "\n";
         }
         finally {
-            System.out.println("======= Окончание попытки платежа ======= ");
+            strReturn += "======= Окончание попытки платежа ======= \n";
         }
+        return strReturn;
     }
+
+    public String payPhoneMulti( boolean first, PaymantPhone paymantPhone, int nAccount, int nPhone, long summa ){
+        String strReturn;
+        strReturn = "------- Начало попытки платежа на сервер " + paymantPhone.getServerName() + " (порт " + paymantPhone.getPort() + ") -------\n";
+        try{
+            strReturn += paymantPhone.sendPayMulti(first, accounts.get(nAccount).getNumberAccount(), phones.get(nPhone).getNumberPhone(), summa);
+        }
+        catch(PhoneException p_ex){
+            strReturn += "Иcключeниe: " + p_ex.getMessage() + "\n" + "Номер телефона: " + p_ex.getPhone() + "\n";
+        }
+        catch(Exception ex){
+            strReturn += "Иcключeниe: " + ex.getMessage() + "\n";
+        }
+        finally {
+            strReturn += "======= Окончание попытки платежа ======= \n";
+        }
+        return strReturn;
+    }
+
 }
