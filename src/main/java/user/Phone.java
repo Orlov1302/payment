@@ -28,7 +28,7 @@ public class Phone {
 
     public static void exceptionCorrectPhone( String numPhone ) throws PhoneException {
         String error = errorNumberPhone( numPhone );
-        if( error != "" ) {
+        if( !error.equals("") ) {
             throw new PhoneException(error, numPhone);
         }
     }
