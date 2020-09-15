@@ -1,57 +1,45 @@
 package user;
 
+import payment.PaymantPhone;
+
 import javax.swing.*;
+import java.util.Date;
 
 public class ShowUser {
-    public ShowUser( User user ){
+    public ShowUser( User user, PaymantPhone paymantPhone ){
         // создать новый контейнер типа JFraDe
-        JFrame jfrm = new JFrame("Пользователь №" + user.numberUser + " " + user.stringFIO );
+        JFrame jfrm = new JFrame("Тестирование платежа" );
         // задать исходные размеры фрейма
         jfrm.setSize(1000, 500);
         // завершить работу, если пользователь закрывает приложение
         jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // создать метку с текстом сообщения
 
         //////////////////////////////
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-
         JPanel panel1 = new JPanel();
+        panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
         JPanel panel2 = new JPanel();
-        JPanel panel3 = new JPanel();
-
         mainPanel.add(panel1);
         mainPanel.add(panel2);
-        mainPanel.add(panel3);
         jfrm.add(mainPanel);
-        /////////////
 
-        JLabel jlab = new JLabel("Пользователь №" + user.numberUser + " " + user.stringFIO );
-        // ввести метку на панели содержимого
-        panel1.add(jlab);
+        // Первая панель
+        JLabel jlab1 = new JLabel("Пользователь №" + user.numberUser + " " + user.stringFIO );
+        panel1.add(jlab1);
+        JLabel jlab2 = new JLabel("Счет: " + user.numberAccount + "   Номер телефона: " + user.getPhone().getNumberPhone() );
+        panel1.add(jlab2);
 
-        String[] colHeadsAccounts = {"Счета"};
-        String[][] dataAccounts = new String[user.getAccounts().size()][1];
-        for(int n=0; n<user.getAccounts().size(); ++n){
-            dataAccounts[n][0] = user.getAccounts().get(n).getNumberAccount();
-        }
-        JTable tableAccounts = new JTable(dataAccounts, colHeadsAccounts);
-        JScrollPane jspAccounts = new JScrollPane(tableAccounts);
-        panel2.add(jspAccounts);
-
-
-        String[] colHeadsPhones = {"Телефонные номера"};
-        String[][] dataPhones = new String[user.getPhones().size()][1];
-        for(int n=0; n<user.getPhones().size(); ++n){
-            dataPhones[n][0] = user.getPhones().get(n).getNumberPhone();
-        }
-        JTable tablePhones = new JTable(dataPhones, colHeadsPhones);
-        JScrollPane jspPhones = new JScrollPane(tablePhones);
-        panel3.add(jspPhones);
+        // Вторая панель
+        JButton jbtnA = new JButton("Alpha " );
+        jbtnA.addActionListener( (ae) -> this.pay(user, paymantPhone) ) ;
+        panel2.add(jbtnA);
 
         // отобразить фрейм
         jfrm.setVisible(true);
-        // создать фрейм в потоке диспетчеризации событий
     }
 
+    public void pay(User user, PaymantPhone paymantPhone) {
+        System.out.println(user.payPhone(new Date(), paymantPhone, 200));
+    }
 }

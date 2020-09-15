@@ -1,9 +1,9 @@
 package payment;
 
 import my_exception.PhoneException;
-import user.Account;
-import user.Phone;
+
+import java.util.Date;
 
 public interface Payment {
-    abstract String sendPay(boolean first, String numberAccount, String numberPhone, long summa) throws PhoneException;
+    abstract String sendPay(Date date, String numberAccount, String numberPhone, long summa) throws PhoneException;
 }

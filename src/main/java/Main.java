@@ -1,59 +1,51 @@
+import phone.PhoneOnlyDigit;
+import phone.PhonePlus;
 import user.*;
 import payment.*;
-
 import javax.swing.*;
 import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
         long milisec;
+        Date date;
         PaymantPhone paymantPhone1 = new PaymantPhone("sbol.sbrf.ru", "123" );
         User user1 = new User( 12345, "Иванов иван Иванович");
-        int n, maxN = 1000000;
+        int n, maxN = 100;
         // Тест работы
-        user1.getAccounts().add(new Account("1234500001"));
-        user1.getAccounts().add(new Account("1234500002"));
-        user1.getAccounts().add(new Account("1234500003"));
-        System.out.println( user1.payPhone(true, paymantPhone1,0,0, 100) );
+        user1.setNumberAccount("1234500001");
+        System.out.println( user1.payPhone( new Date(), paymantPhone1,100) );
 
-        user1.getPhones().add(new Phone("89O5777O356"));
-        System.out.println( user1.payPhone(true, paymantPhone1,0,0, 200) );
+        user1.setPhone(new PhoneOnlyDigit("9O57770377"));
+        System.out.println( user1.payPhone(new Date(), paymantPhone1,200) );
 
-        user1.getPhones().add(new Phone("9O5777O356"));
-        System.out.println( user1.payPhone(true, paymantPhone1,0,1, 300) );
+        user1.setPhone(new PhonePlus("9057770377"));
+        System.out.println( user1.payPhone(new Date(), paymantPhone1,300) );
 
-        user1.getPhones().set(0, new Phone("9057770377"));
-        user1.getPhones().set(1, new Phone("9057770356"));
-        System.out.println( user1.payPhone(true, paymantPhone1,0,1, 400) );
-        System.out.println( user1.payPhone(false, paymantPhone1,0,1, 400) );
+        user1.setPhone(new PhoneOnlyDigit("9057770377"));
+        date = new Date();
+        System.out.println( user1.payPhone(date, paymantPhone1,400) );
+        System.out.println( user1.payPhone(date, paymantPhone1,400) );
 
         System.out.println("====== Тест быстродействия защиты от повторных запросов ===== ");
 
         System.out.print("На HashSet<ClassParametersBig> ");
         milisec = System.currentTimeMillis();
         for( n=1; n < maxN; ++n) {
-            user1.payPhone(true, paymantPhone1, 0, 0, n);
-            user1.payPhone(false, paymantPhone1, 0, 0, n);
+            date = new Date();
+            user1.payPhone(date, paymantPhone1, n);
+            user1.payPhone(date, paymantPhone1, n);
         }
         milisec = System.currentTimeMillis() - milisec;
         System.out.println("заняло времени, мс: " + milisec);
 
-        System.out.print("На HashMultimap<Date,ClassParametersSmall> ");
-        milisec = System.currentTimeMillis();
-        for( n=1; n < maxN; ++n) {
-            user1.payPhoneMulti(true, paymantPhone1, 0, 0, n);
-            user1.payPhoneMulti(false, paymantPhone1, 0, 0, n);
-        }
-        milisec = System.currentTimeMillis() - milisec;
-        System.out.println("заняло времени, мс: " + milisec);
-
-        //startShowUser( user1 ); //Проверка работы графического инстру
+        startShowUser( user1, paymantPhone1 ); //Проверка работы графического инстру
         System.out.println("========================================= ");
     }
 
-    public static void startShowUser( User user ){
+    public static void startShowUser( User user, PaymantPhone paymantPhone ){
         // создать фрейм в потоке диспетчеризации событий
-        SwingUtilities.invokeLater(() -> new ShowUser(user));
+        SwingUtilities.invokeLater(() -> new ShowUser(user, paymantPhone));
         /* То же самое записанное в старом стиле:
         SwingUtilities.invokeLater(new Runnable() {
             public void run(){ new ShowUser(user); }

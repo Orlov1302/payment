@@ -7,11 +7,9 @@ import java.util.HashSet;
 
 public class Server {
     private HashSet<ParametersPayment> oldPayments; // Здесь храняться старые запросы
-    private HashMultimap<Date, ParametersMulti> oldPaymentsMulti; // Здесь храняться старые запросы
 
     public Server(){
         oldPayments = new HashSet<>();
-        oldPaymentsMulti = HashMultimap.create();
     }
 
     public String getPay(Date date, String numberAccount, String numberPhone, long summa ){
@@ -20,15 +18,6 @@ public class Server {
             return "Запрос поступил повторно !!!!!!!!!!!!!\n";
         }
         oldPayments.add(parametersTest);
-        return "Оплата произведена успешно со счета " + numberAccount + " для телефона " + numberPhone + "\n";
-    }
-
-    public String getPayMulti(Date date, String numberAccount, String numberPhone, long summa ){
-        ParametersMulti parametersMulti = new ParametersMulti(numberAccount, numberPhone, summa);
-        if( oldPaymentsMulti.containsEntry(date, parametersMulti) ){
-            return "Запрос поступил повторно !!!!!!!!!!!!!\n";
-        }
-        oldPaymentsMulti.put(date, parametersMulti);
         return "Оплата произведена успешно со счета " + numberAccount + " для телефона " + numberPhone + "\n";
     }
 }

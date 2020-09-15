@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PhoneTest {
-
+/*
     @Test
     void errorNumberPhone() {
         assertEquals("", Phone.errorNumberPhone("9057770377"));
@@ -24,4 +24,6 @@ class PhoneTest {
         Phone phone = new Phone(nPhone);
         assertEquals(nPhone, phone.getNumberPhone());
     }
+
+ */
 }
