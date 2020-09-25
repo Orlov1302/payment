@@ -1,10 +1,5 @@
 package phone;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Setter
-@Getter
 public class PhoneOnlyDigit extends Phone {
     public PhoneOnlyDigit(String numberPhone) {
         super(numberPhone);
@@ -12,6 +7,6 @@ public class PhoneOnlyDigit extends Phone {
 
     @Override
     public String formatNumberPhone() {
-        return "1234567890";
+        return "9999999999";
     }
 }

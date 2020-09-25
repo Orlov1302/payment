@@ -1,3 +1,4 @@
+import phone.FuncTestPhone_Strong;
 import phone.PhoneOnlyDigit;
 import phone.PhonePlus;
 import user.*;
@@ -14,21 +15,18 @@ public class Main {
         int n, maxN = 100;
         // Тест работы
         user1.setNumberAccount("1234500001");
-        System.out.println( user1.payPhone( new Date(), paymantPhone1,100) );
-
         user1.setPhone(new PhoneOnlyDigit("9O57770377"));
-        System.out.println( user1.payPhone(new Date(), paymantPhone1,200) );
+        System.out.println( user1.testPhone() );
 
-        user1.setPhone(new PhonePlus("9057770377"));
-        System.out.println( user1.payPhone(new Date(), paymantPhone1,300) );
+        user1.setPhone(new PhonePlus("+89057770377"));
+        System.out.println( user1.testPhone() );
+        System.out.println( user1.testPhone(FuncTestPhone_Strong::func) );
 
-        user1.setPhone(new PhoneOnlyDigit("9057770377"));
         date = new Date();
         System.out.println( user1.payPhone(date, paymantPhone1,400) );
         System.out.println( user1.payPhone(date, paymantPhone1,400) );
 
         System.out.println("====== Тест быстродействия защиты от повторных запросов ===== ");
-
         System.out.print("На HashSet<ClassParametersBig> ");
         milisec = System.currentTimeMillis();
         for( n=1; n < maxN; ++n) {

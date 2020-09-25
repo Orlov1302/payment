@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import my_exception.PhoneException;
 import payment.*;
+import phone.FuncTestPhone;
+import phone.FuncTestPhone_Strong;
 import phone.Phone;
 import phone.TestCorrectPhone;
 
@@ -22,15 +24,34 @@ public class User {
         this.stringFIO = stringFIO;
     }
 
+    public String testPhone(){
+        return testPhone(null);
+    }
+
+    public String testPhone(FuncTestPhone testFunc){
+        TestCorrectPhone<Phone> testCorrectPhone;
+        try{
+            testCorrectPhone = new TestCorrectPhone<>(phone);
+            if( testFunc != null ){
+                testCorrectPhone.setFuncTestPhone(FuncTestPhone_Strong::func); //Замена стандартной функции тестировани
+            }
+            testCorrectPhone.testCorrectNumberPhone(); // Тест корректности номера телефона
+        }
+        catch(PhoneException p_ex){
+            return "Иcключeниe: " + p_ex.getMessage() + "\n" + "Номер телефона: " + p_ex.getPhone() + "\n";
+        }
+        catch(Exception ex){
+            return "Иcключeниe: " + ex.getMessage() + "\n";
+        }
+        return "Телефон "+ phone.getNumberPhone() + " соответсвует формату " + phone.formatNumberPhone() + "\n";
+    }
+
+
     public String payPhone(Date date, PaymantPhone paymantPhone, long summa ){
         String strReturn;
         strReturn = "------- Начало попытки платежа на сервер " + paymantPhone.getServerName() + " (порт " + paymantPhone.getPort() + ") -------\n";
         try{
-            (new TestCorrectPhone<>(phone)).testCorrectNumberPhone();
             strReturn += paymantPhone.sendPay(date, numberAccount, phone.getNumberPhone(), summa);
-        }
-        catch(PhoneException p_ex){
-            strReturn += "Иcключeниe: " + p_ex.getMessage() + "\n" + "Номер телефона: " + p_ex.getPhone() + "\n";
         }
         catch(Exception ex){
             strReturn += "Иcключeниe: " + ex.getMessage() + "\n";

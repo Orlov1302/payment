@@ -7,7 +7,6 @@ public class PhonePlus extends Phone {
 
     @Override
     public String formatNumberPhone() {
-        return "+71234567890";
+        return "+79999999999";
     }
-
 }
