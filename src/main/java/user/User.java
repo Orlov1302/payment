@@ -47,19 +47,8 @@ public class User {
     }
 
 
-    public String payPhone(Date date, PaymantPhone paymantPhone, long summa ){
-        String strReturn;
-        strReturn = "------- Начало попытки платежа на сервер " + paymantPhone.getServerName() + " (порт " + paymantPhone.getPort() + ") -------\n";
-        try{
-            strReturn += paymantPhone.sendPay(date, numberAccount, phone.getNumberPhone(), summa);
-        }
-        catch(Exception ex){
-            strReturn += "Иcключeниe: " + ex.getMessage() + "\n";
-        }
-        finally {
-            strReturn += "======= Окончание попытки платежа ======= \n";
-        }
-        return strReturn;
+    public ParametersPayment getParametersPayment(Date date, long summa ){
+        return new ParametersPayment(date, numberAccount, phone.getNumberPhone(), summa);
     }
 
 }

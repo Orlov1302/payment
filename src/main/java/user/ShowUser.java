@@ -1,12 +1,11 @@
 package user;
 
-import payment.PaymantPhone;
-
 import javax.swing.*;
 import java.util.Date;
 
 public class ShowUser {
-    public ShowUser( User user, PaymantPhone paymantPhone ){
+    public ShowUser( User user ){
+        /*
         // создать новый контейнер типа JFraDe
         JFrame jfrm = new JFrame("Тестирование платежа" );
         // задать исходные размеры фрейма
@@ -37,9 +36,13 @@ public class ShowUser {
 
         // отобразить фрейм
         jfrm.setVisible(true);
-    }
 
+         */
+    }
+/*
     public void pay(User user, PaymantPhone paymantPhone) {
         System.out.println(user.payPhone(new Date(), paymantPhone, 200));
     }
+
+ */
 }

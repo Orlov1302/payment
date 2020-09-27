@@ -16,4 +16,8 @@ public class ParametersPayment {
     private String numberAccount;
     private String numberPhone;
     private long summa;
+
+    public ParametersPayment(){
+        this(null,null,null,0);
+    }
 }
