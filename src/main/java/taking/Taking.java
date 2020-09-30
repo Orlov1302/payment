@@ -6,3 +6,5 @@ public interface Taking {
     public ParametersPayment takePayment();
     public void stopTaking();
 }
+
+////
