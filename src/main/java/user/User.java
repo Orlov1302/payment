@@ -48,7 +48,11 @@ public class User {
 
 
     public ParametersPayment getParametersPayment(Date date, long summa ){
-        return new ParametersPayment(date, numberAccount, phone.getNumberPhone(), summa);
+        if( numberAccount == null || phone == null || date == null){
+            return new ParametersPayment(new Date, "", "", 0);
+        }else{
+            return new ParametersPayment(date, numberAccount, phone.getNumberPhone(), summa);
+        }
     }
 
 }
