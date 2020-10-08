@@ -1,6 +1,6 @@
 package phone;
 
-public interface FuncTestPhone {
+public interface ValidationFuncOfPhone {
     public String func(Phone t);
 }
 

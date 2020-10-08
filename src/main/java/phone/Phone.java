@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public class Phone {
     protected String numberPhone;
-    public String formatNumberPhone() {
+    public String getMaskNumberPhone() {
         return "";
     }
 }

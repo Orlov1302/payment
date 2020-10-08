@@ -11,14 +11,15 @@ import java.util.Date;
 @Setter
 @Getter
 @EqualsAndHashCode
-public class ParametersPayment {
+public class PaymentParameters {
     private Date date;
     private String numberAccount;
     private String numberPhone;
     private long summa;
+    private Currency currency;
 
-    public ParametersPayment(){
-        this(null,null,null,0);
+    public PaymentParameters(){
+        this(null,null,null,0, Currency.RUB);
     }
 }
 

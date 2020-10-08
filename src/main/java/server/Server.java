@@ -1,6 +1,6 @@
 package server;
 
-import payment.ParametersPayment;
+import payment.PaymentParameters;
 import taking.Taking;
 
 import java.util.HashSet;
@@ -8,7 +8,7 @@ import java.util.HashSet;
 public class Server implements Runnable {
     private Thread thread;
     private Taking taking;
-    private HashSet<ParametersPayment> oldPayments; // Здесь храняться старые запросы
+    private HashSet<PaymentParameters> oldPayments; // Здесь храняться старые запросы
 
     public Server(Taking taking) {
         this.taking = taking;
@@ -28,24 +28,24 @@ public class Server implements Runnable {
     public void run() {
 	    while(true) {
             try {
-                ParametersPayment parametersPayment;
-                parametersPayment = taking.takePayment();
-                if( parametersPayment == null ){
+                PaymentParameters paymentParameters;
+                paymentParameters = taking.takePayment();
+                if( paymentParameters == null ){
                     System.out.println("Поток остановлен жестко");
                     break;
-                }else if( parametersPayment.getDate() == null ||
-                        parametersPayment.getNumberAccount() == null ||
-                        parametersPayment.getNumberPhone() == null ) {
+                }else if( paymentParameters.getDate() == null ||
+                        paymentParameters.getNumberAccount() == null ||
+                        paymentParameters.getNumberPhone() == null ) {
                     System.out.println("Поток остановлен мягко");
                     break;
                 }else{
-                    System.out.print("Платеж со счета " + parametersPayment.getNumberAccount() +
-                        " на телефон " + parametersPayment.getNumberPhone());
-                    if (oldPayments.contains(parametersPayment)) {
+                    System.out.print("Платеж со счета " + paymentParameters.getNumberAccount() +
+                        " на телефон " + paymentParameters.getNumberPhone());
+                    if (oldPayments.contains(paymentParameters)) {
                         System.out.println(" не выполнен. Запрос поступил повторно!!!");
                     } else {
                         System.out.println(" выполнен.");
-                        oldPayments.add(parametersPayment);
+                        oldPayments.add(paymentParameters);
                     }
                 }
             }

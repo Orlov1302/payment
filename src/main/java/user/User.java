@@ -4,10 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import my_exception.PhoneException;
 import payment.*;
-import phone.FuncTestPhone;
-import phone.FuncTestPhone_Strong;
+import phone.ValidationFuncOfPhone;
+import phone.ValidationFuncOfPhone_Strong;
 import phone.Phone;
-import phone.TestCorrectPhone;
+import phone.PhoneValidator;
 
 import java.util.Date;
 
@@ -24,18 +24,23 @@ public class User {
         this.stringFIO = stringFIO;
     }
 
-    public String testPhone(){
-        return testPhone(null);
+    public String validationPhone(){
+        return validationPhone(null);
     }
 
-    public String testPhone(FuncTestPhone testFunc){
-        TestCorrectPhone<Phone> testCorrectPhone;
+    // Из данной функции вызывается ожноименная функция, что усложняет код,
+    // но сделано так:
+    // - для демонстрации работы исключений;
+    // - для демонстрации передачи в виде аргумента лямбда функции;
+    // - для написания тестирующего кода в классе Main.
+    public String validationPhone(ValidationFuncOfPhone validationFunc){
+        PhoneValidator<Phone> phoneValidator;
         try{
-            testCorrectPhone = new TestCorrectPhone<>(phone);
-            if( testFunc != null ){
-                testCorrectPhone.setFuncTestPhone(FuncTestPhone_Strong::func); //Замена стандартной функции тестировани
+            phoneValidator = new PhoneValidator<>(phone);
+            if( validationFunc != null ){
+                phoneValidator.setValidationFuncOfPhone(ValidationFuncOfPhone_Strong::func); //Замена стандартной функции тестировани
             }
-            testCorrectPhone.testCorrectNumberPhone(); // Тест корректности номера телефона
+            phoneValidator.validationPhone(); // Проверка валидности номера телефона
         }
         catch(PhoneException p_ex){
             return "Иcключeниe: " + p_ex.getMessage() + "\n" + "Номер телефона: " + p_ex.getPhone() + "\n";
@@ -43,15 +48,15 @@ public class User {
         catch(Exception ex){
             return "Иcключeниe: " + ex.getMessage() + "\n";
         }
-        return "Телефон "+ phone.getNumberPhone() + " соответсвует формату " + phone.formatNumberPhone() + "\n";
+        return "Телефон "+ phone.getNumberPhone() + " соответсвует формату " + phone.getMaskNumberPhone() + "\n";
     }
 
 
-    public ParametersPayment getParametersPayment(Date date, long summa ){
+    public PaymentParameters getParametersPayment(Date date, long summa, Currency currency ){
         if( numberAccount == null || phone == null || date == null ){
-            return new ParametersPayment(new Date(),"", "", 0);
+            return new PaymentParameters(new Date(),"", "", 0, currency);
         }else{
-            return new ParametersPayment(date, numberAccount, phone.getNumberPhone(), summa);
+            return new PaymentParameters(date, numberAccount, phone.getNumberPhone(), summa, currency);
         }
     }
 

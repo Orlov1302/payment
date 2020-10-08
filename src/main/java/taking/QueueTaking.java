@@ -1,18 +1,18 @@
 package taking;
 
-import payment.ParametersPayment;
+import payment.PaymentParameters;
 
 import java.util.concurrent.BlockingQueue;
 
 public class QueueTaking implements Taking {
-    private BlockingQueue<ParametersPayment> queue;
+    private BlockingQueue<PaymentParameters> queue;
 
-    public QueueTaking( BlockingQueue<ParametersPayment> queue ){
+    public QueueTaking( BlockingQueue<PaymentParameters> queue ){
         this.queue = queue;
     }
 
     @Override
-    public ParametersPayment takePayment(){
+    public PaymentParameters takePayment(){
         try {
             return queue.take();
         } catch (InterruptedException ex) {
@@ -27,7 +27,7 @@ public class QueueTaking implements Taking {
     @Override
     public void stopTaking(){
         try {
-            queue.put(new ParametersPayment());
+            queue.put(new PaymentParameters());
         } catch (InterruptedException ex) {
             System.out.println(ex.getMessage());
         }

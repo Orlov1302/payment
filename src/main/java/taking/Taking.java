@@ -1,9 +1,9 @@
 package taking;
 
-import payment.ParametersPayment;
+import payment.PaymentParameters;
 
 public interface Taking {
-    public ParametersPayment takePayment();
+    public PaymentParameters takePayment();
     public void stopTaking();
 }
 

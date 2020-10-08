@@ -1,9 +1,9 @@
 package putting;
 
-import payment.ParametersPayment;
+import payment.PaymentParameters;
 
 public interface Putting {
-    abstract void putPayment(ParametersPayment parametersPayment);
+    abstract void putPayment(PaymentParameters paymentParameters);
 }
 
 ////
