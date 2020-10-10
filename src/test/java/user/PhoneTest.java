@@ -1,29 +1,33 @@
 package user;
 
-import my_exception.PhoneException;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
+import phone.Phone_OnlyDigits;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 class PhoneTest {
-/*
-    @Test
-    void errorNumberPhone() {
-        assertEquals("", Phone.errorNumberPhone("9057770377"));
+    public User user1;
+
+    @Before
+    public void before() {
+        user1 = new User(12345, "Иванов иван Иванович");
+        user1.setNumberAccount("1234500001");
     }
 
     @Test
-    void exceptionCorrectPhone() {
-        assertThrows(PhoneException.class, () -> Phone.exceptionCorrectPhone("377") );
+    public void test_1() {
+        before(); // Если убрать, то тест не будет пройден.
+        user1.setPhone(new Phone_OnlyDigits("9O57770377"));
+        assertNotEquals(user1.validationPhone().substring(0,10), "Исключение");
     }
 
     @Test
-    void getNumberPhone() {
-        String nPhone = "9057770377";
-        Phone phone = new Phone(nPhone);
-        assertEquals(nPhone, phone.getNumberPhone());
+    public void test_2() {
+        before(); // Если убрать, то тест не будет пройден.
+        user1.setPhone(new Phone_OnlyDigits("9057770377"));
+        assertEquals(user1.validationPhone().substring(0,7), "Телефон");
     }
 
- */
 }

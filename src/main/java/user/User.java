@@ -38,7 +38,7 @@ public class User {
         try{
             phoneValidator = new PhoneValidator<>(phone);
             if( validationFunc != null ){
-                phoneValidator.setValidationFuncOfPhone(ValidationFuncOfPhone_Strong::func); //Замена стандартной функции тестировани
+                phoneValidator.setValidationFuncOfPhone(validationFunc); //Замена стандартной функции тестировани
             }
             phoneValidator.validationPhone(); // Проверка валидности номера телефона
         }
