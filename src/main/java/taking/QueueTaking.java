@@ -35,4 +35,3 @@ public class QueueTaking implements Taking {
 
 }
 
-////

@@ -6,4 +6,3 @@ public interface Putting {
     abstract void putPayment(PaymentParameters paymentParameters);
 }
 
-////
