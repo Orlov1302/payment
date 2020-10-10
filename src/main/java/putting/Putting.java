@@ -3,7 +3,7 @@ package putting;
 import payment.PaymentParameters;
 
 public interface Putting {
-    abstract void putPayment(PaymentParameters paymentParameters);
+    void putPayment(PaymentParameters paymentParameters);
 }
 
 ////
